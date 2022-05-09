@@ -11,7 +11,7 @@ array[1..n] of int: y_dims = [dimensions[i,2]|i in 1..n]; %defining y dims varia
 
 %auxilary variables
 int: max_x_coord =(width - min(x_dims));
-int: max_y_coord =ceil(sum(y_dims)/floor(width / max(x_dims)));
+int: max_y_coord =ceil(sum(y_dims)/floor(width / max(x_dims))); %why not set the upper bound recursively?
 
 array[1..n] of var 1..max_x_coord: x_coords; 
 array[1..n] of var 1..max_y_coord: y_coords; 
@@ -25,11 +25,12 @@ var 1..max_y_coord: length;
 
 constraint diffn(x_coords, y_coords, x_dims, y_dims);
 constraint cumulative(x_coords, x_dims, y_dims, length);
+constraint max(i in 1..n)(x_coords[i] + x_dims[i]) <= width;
 
 %symmetry breaking
-%constraint increasing(y_coords);
+% constraint increasing(x_coords);
 
-constraint sort(x_coords, sort_by(y_coords,x_coords));
+% constraint sort(x_coords, sort(y_coords));
 
 solve minimize length;
 
