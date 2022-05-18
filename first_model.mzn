@@ -28,7 +28,7 @@ constraint cumulative(x_coords, x_dims, y_dims, length);
 constraint max(i in 1..n)(x_coords[i] + x_dims[i]) <= width;
 
 %symmetry breaking
-% constraint increasing(x_coords);
+%constraint increasing(x_coords);
 
 % constraint sort(x_coords, sort(y_coords));
 
