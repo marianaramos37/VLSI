@@ -17,18 +17,24 @@ array[1..n] of var 1..max_x_coord: x_coords;
 array[1..n] of var 1..max_y_coord: y_coords; 
 % array[1..n,1..n] of var int: coords; TODO: use this on the 
 
-var 1..max_y_coord: length;
+var 1..(max_y_coord + max(y_dims)): length;
+
+
+
 
 %constraints
 
 %predicate geost(2, dimensions, array [int,int] of int: rect_offset,  array [int] of set of int: shape,array [int,int] of var int: x,array [int] of var int: kind)
 
+
 constraint diffn(x_coords, y_coords, x_dims, y_dims);
 constraint cumulative(x_coords, x_dims, y_dims, length);
+constraint cumulative(y_coords, y_dims, x_dims, width);
 constraint max(i in 1..n)(x_coords[i] + x_dims[i]) <= width;
+constraint max(i in 1..n)(y_coords[i] + y_dims[i]) <= length;
 
 %symmetry breaking
-%constraint increasing(x_coords);
+constraint lex_lesseq(x_coords, [max(x_coords) - x_coords[i] | i in 1..n]);
 
 % constraint sort(x_coords, sort(y_coords));
 
