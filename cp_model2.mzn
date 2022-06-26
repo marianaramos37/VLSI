@@ -16,7 +16,7 @@ array[1..n] of int: y_dims = [dimensions[i,2]|i in 1..n];   % y dimention variab
 set of int: blocks = 1..n;
 
 int: max_x_coord =(width - min(x_dims));                           % x coordinates upper bound
-int: max_y_coord = ceil(sum(y_dims)/floor(width / max(x_dims)));   % y coordinates upper bound
+int: max_y_coord = ceil(sum(y_dims)/floor(width / max(x_dims))) - min(y_dims);   % y coordinates upper bound
 
 array[blocks] of var 0..max_x_coord: x_coords;                     % x coordinates array
 array[blocks] of var 0..max_y_coord: y_coords;                     % y coordinates array
@@ -25,15 +25,11 @@ array[blocks] of var 0..max_y_coord: y_coords;                     % y coordinat
  
 % Defining boundaries for the height and Implied Constraints
 
-var int: height = max(block in blocks)(y_coords[block]+ y_dims[block]);
+int: min_height = ceil(( sum(block in blocks)(x_dims[block] * y_dims[block]) div width));
 
-var int: min_height = ceil(( sum(block in blocks)(x_dims[block] * y_dims[block]) div width));
+var min_height..(max_y_coord + max(y_dims)): height;
 
-constraint height >= max(min_height, max(y_dims));
- 
-constraint forall(block in blocks)(
-  x_coords[block] + x_dims[block] <= width /\ 
-  y_coords[block] + y_dims[block] <= height);
+%constraint forall(block in blocks)(x_coords[block] + x_dims[block] <= width /\ Sy_coords[block] + y_dims[block] <= height);
   
 
 % Global Constraints:
