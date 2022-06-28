@@ -42,11 +42,11 @@ out_inst = out_inst[0:-1]
 out_inst += "|];"
 print(out_inst)
 
-x_coordinates = [2, 2, 2, 2, 3, 5, 5, 6, 8, 9, 12, 12, 12, 16]
-y_coordinates = [12, 1, 15, 20, 5, 21, 12, 2, 18, 1, 14, 17, 3, 12]
+x_coordinates = [13, 7, 10, 7, 10, 10, 4, 7, 4, 13, 0, 16, 16, 0]
+y_coordinates = [0, 10, 0, 14, 13, 5, 0, 0, 9, 3, 0, 11, 0, 3]
 x_dimensions = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4]
 y_dimensions = [3, 4, 5, 6, 7, 8, 9, 10, 11, 17, 3, 9, 11, 17]
-minimum_length = 29
+minimum_height = 20
 
 pos = list(zip(x_coordinates,y_coordinates))
 vec = list(zip(x_dimensions,y_dimensions))

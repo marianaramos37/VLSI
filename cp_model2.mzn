@@ -1,4 +1,5 @@
 include "globals.mzn";
+include "chuffed.mzn";
 
 mzn_ignore_symmetry_breaking_constraints = true;
 
@@ -27,7 +28,9 @@ array[blocks] of var 0..max_y_coord: y_coords;                     % y coordinat
 
 int: min_height = ceil(( sum(block in blocks)(x_dims[block] * y_dims[block]) div width));
 
-var min_height..(max_y_coord + max(y_dims)): height;
+var min_height..ceil(sum(y_dims)/floor(width / max(x_dims))): height;
+
+int: index = arg_max(y_dims);
 
 %constraint forall(block in blocks)(x_coords[block] + x_dims[block] <= width /\ Sy_coords[block] + y_dims[block] <= height);
   
@@ -36,6 +39,10 @@ var min_height..(max_y_coord + max(y_dims)): height;
 
 % 1º Rectangle sizes must not exceed the given width/height of the plate
 
+constraint forall(block in blocks)(
+  x_coords[block] + x_dims[block] <= width /\ 
+  y_coords[block] + y_dims[block] <= height);
+
 constraint cumulative(x_coords, x_dims, y_dims, height);
 constraint cumulative(y_coords, y_dims, x_dims, width);
 
@@ -43,59 +50,65 @@ constraint cumulative(y_coords, y_dims, x_dims, width);
 
 constraint diffn(x_coords, y_coords, x_dims, y_dims);
 
+constraint lex_lesseq(x_coords, [max(x_coords) - x_coords[i] | i in 1..n]);
+constraint lex_lesseq(x_coords, [max_x_coord - x_coords[i] | i in 1..n]);
+constraint lex_lesseq(y_coords, [max(y_coords) - y_coords[i] | i in 1..n]);
+constraint lex_lesseq(y_coords, [max_y_coord - y_coords[i] | i in 1..n]);
 
-% Symmetry breaking:
+constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
 
-% 1º Blocks that have equal dimensions on both width AND height are interchangeable
-% less_lesseq - Requires that the array x is lexicographically less than or equal to array y 
+% % Symmetry breaking:
 
-constraint forall(block1,block2 in blocks where block1 < block2 /\
-                  x_dims[block1] = x_dims[block2] /\ 
-                  y_dims[block1] = y_dims[block2])(                      % Same dimensions
-                  symmetry_breaking_constraint(
-                  lex_lesseq([x_coords[block1],y_coords[block1]],       % Interchangeable    
-                             [x_coords[block2],y_coords[block2]])));
+% % 1º Blocks that have equal dimensions on both width AND height are interchangeable
+% % less_lesseq - Requires that the array x is lexicographically less than or equal to array y 
 
-% 2º Blocks that have same height OR width and are adjacent are interchangeble
+% constraint forall(block1,block2 in blocks where block1 < block2 /\
+%                   x_dims[block1] = x_dims[block2] /\ 
+%                   y_dims[block1] = y_dims[block2])(                      % Same dimensions
+%                   symmetry_breaking_constraint(
+%                   lex_lesseq([x_coords[block1],y_coords[block1]],       % Interchangeable    
+%                              [x_coords[block2],y_coords[block2]])));
 
-constraint forall(block1,block2 in blocks where block1 < block2 /\
-                  x_dims[block1] = x_dims[block2] /\                      % Same width  
-                  x_coords[block1] = x_coords[block2] /\                  % Adjacent along the y axis
-                  y_dims[block1] + y_coords[block1] = y_coords[block2])(  % Adjacent along the y axis
-                  symmetry_breaking_constraint(
-                  lex_lesseq([y_coords[block1]], [y_coords[block2]])));   % Interchangeable  
+% % 2º Blocks that have same height OR width and are adjacent are interchangeble
+
+% constraint forall(block1,block2 in blocks where block1 < block2 /\
+%                   x_dims[block1] = x_dims[block2] /\                      % Same width  
+%                   x_coords[block1] = x_coords[block2] /\                  % Adjacent along the y axis
+%                   y_dims[block1] + y_coords[block1] = y_coords[block2])(  % Adjacent along the y axis
+%                   symmetry_breaking_constraint(
+%                   lex_lesseq([y_coords[block1]], [y_coords[block2]])));   % Interchangeable  
                              
 
-constraint forall(block1,block2 in blocks where block1 < block2 /\
-                  y_dims[block1] = y_dims[block2] /\                      % Same height 
-                  y_coords[block1] = y_coords[block2] /\                  % Adjacent along the x axis
-                  x_dims[block1] + x_coords[block1] = x_coords[block2])(  % Adjacent along the x axis
-                  symmetry_breaking_constraint(
-                  lex_lesseq([x_coords[block1]], [x_coords[block2]])));   % Interchangeable  
+% constraint forall(block1,block2 in blocks where block1 < block2 /\
+%                   y_dims[block1] = y_dims[block2] /\                      % Same height 
+%                   y_coords[block1] = y_coords[block2] /\                  % Adjacent along the x axis
+%                   x_dims[block1] + x_coords[block1] = x_coords[block2])(  % Adjacent along the x axis
+%                   symmetry_breaking_constraint(
+%                   lex_lesseq([x_coords[block1]], [x_coords[block2]])));   % Interchangeable  
                              
-% 3º better performance by fixing block with bigger area on the (0,0) position.
+% % 3º better performance by fixing block with bigger area on the (0,0) position.
 
-array[blocks] of var bool: big_blocks;
+% array[blocks] of var bool: big_blocks;
 
-constraint forall(block in blocks)(big_blocks[block] <-> x_dims[block] > width / 2);
+% constraint forall(block in blocks)(big_blocks[block] <-> x_dims[block] > width / 2);
 
-constraint forall(block in blocks)(
-if big_blocks[block] then x_coords[block] = 0 endif);
+% constraint forall(block in blocks)(
+% if big_blocks[block] then x_coords[block] = 0 endif);
 
-% 4º Horizontal and Verical Flip
+% % 4º Horizontal and Verical Flip
 
 
-% Search
+% % Search
 
-ann: search_ann;
-ann: search_ann1;
-search_ann = int_search(x_coords, input_order, indomain_random);
-search_ann1 = int_search(y_coords, input_order, indomain_random);
-
+% ann: search_ann;
+% % ann: search_ann1;
+% search_ann = int_search(x_coords, dom_w_deg, indomain_min);
+% search_ann1 = int_search(y_coords, input_order, indomain_random);
 
 % Solve objective function: 
 
-solve minimize height;
+solve :: int_search(x_coords, largest_smallest, indomain_min):: int_search(y_coords, largest_smallest, indomain_min):: restart_luby(1)
+ minimize height;
 
 % Output: 
 
