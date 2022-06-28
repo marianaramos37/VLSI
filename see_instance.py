@@ -5,8 +5,8 @@ import random
 
 inst = """
 
-21
-15
+29
+24
 3 3
 3 4
 3 5
@@ -15,13 +15,22 @@ inst = """
 3 8
 3 9
 3 10
-3 14
+3 11
+3 15
 3 18
+3 20
+4 3
 4 4
+4 5
 4 6
-4 11
-5 6
-5 15
+4 7
+4 9
+4 15
+4 18
+4 20
+5 4
+5 8
+5 17
 
 """
 
@@ -42,11 +51,11 @@ out_inst = out_inst[0:-1]
 out_inst += "|];"
 print(out_inst)
 
-x_coordinates = [13, 7, 10, 7, 10, 10, 4, 7, 4, 13, 0, 16, 16, 0]
-y_coordinates = [0, 10, 0, 14, 13, 5, 0, 0, 9, 3, 0, 11, 0, 3]
-x_dimensions = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4]
-y_dimensions = [3, 4, 5, 6, 7, 8, 9, 10, 11, 17, 3, 9, 11, 17]
-minimum_height = 20
+x_coordinates = [3, 3, 3, 3, 6, 19, 13, 16, 6, 16, 13, 19, 0, 9, 9, 3]
+y_coordinates = [4, 7, 11, 16, 15, 14, 13, 12, 4, 0, 0, 0, 0, 0, 3, 0]
+x_dimensions = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 6]
+y_dimensions = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 22, 3, 19, 4]
+minimum_height = 22
 
 pos = list(zip(x_coordinates,y_coordinates))
 vec = list(zip(x_dimensions,y_dimensions))
