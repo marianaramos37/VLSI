@@ -1,6 +1,6 @@
 include "globals.mzn";
 
-mzn_ignore_symmetry_breaking_constraints = true;
+% mzn_ignore_symmetry_breaking_constraints = true;
 
 % Variable Initalization:
 
@@ -29,7 +29,7 @@ var int: height = max(block in blocks)(y_coords[block]+ y_dims[block]);
 
 var int: min_height = ceil(( sum(block in blocks)(x_dims[block] * y_dims[block]) div width));
 
-constraint height >= max(min_height, max(y_dims));
+%constraint height >= max(min_height, max(y_dims));
  
 constraint forall(block in blocks)(
   x_coords[block] + x_dims[block] <= width /\ 
@@ -84,22 +84,26 @@ array[blocks] of var bool: big_blocks;
 constraint forall(block in blocks)(big_blocks[block] <-> x_dims[block] > width / 2);
 
 constraint forall(block in blocks)(
-if big_blocks[block] then x_coords[block] = 0 endif);
+  if big_blocks[block] then x_coords[block] = 0 endif);
 
 % 4º Horizontal and Verical Flip
+
+% Horizontal Plate Flip - y coordinates are all reversed
+constraint lex_lesseq(y_coords,[y_coords[reversed_block] | reversed_block in reverse(blocks)]);
+
+% Vertical Plate Flip - x coordinates are all reversed
+constraint lex_lesseq(x_coords,[x_coords[reversed_block] | reversed_block in reverse(blocks)]);
 
 
 % Search
 
-ann: search_ann;
-ann: search_ann1;
-search_ann = int_search(x_coords, input_order, indomain_random);
-search_ann1 = int_search(y_coords, input_order, indomain_random);
-
 
 % Solve objective function: 
 
+% Default
 solve minimize height;
+
+/**/
 
 % Output: 
 
