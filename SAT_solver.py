@@ -2,6 +2,17 @@ from z3 import *
 from itertools import combinations
 import time
 
+# Aux functions
+
+def at_least_one(bool_vars):
+    return Or(bool_vars)
+
+def at_most_one(bool_vars):
+    return [Not(And(pair[0], pair[1])) for pair in combinations(bool_vars, 2)]
+
+def exactly_one(bool_vars):
+    return at_most_one(bool_vars) + [at_least_one(bool_vars)]
+
 # Instance 
 class Instance(object):
     width = 0
@@ -68,21 +79,27 @@ def solve(instance):
 
     for block in range(instance.n):                                                           # For every block
         block_possible_positions=[]
-        for y in range(max_height - y_dims[block]):                                       # For every possible position where it fits
+        for y in range(max_height - y_dims[block]):                                           # For every possible position where it fits
             for x in range(instance.width - x_dims[block] + 1):
                 position = []
-                if(x + x_dims[block] <= instance.width and y + y_dims[block] <= max_height): # If it fits in both height and width
-                    position.append(boolean_plate[y][x][block])                         # Add to possible positions
-                    print(f"possible block - {block} at ({x},{y})")
-                else: position.append(Not(boolean_plate[y][x][block]))
-        block_possible_positions.append(And(position))
-        solver.add(block_possible_positions)
+                
+                for y_filling in range(max_height):
+                    for x_filling in range(instance.width):
+                        if(y_filling >= y and y_filling <= y + y_dims[block] and x_filling >= x and x_filling <= x + x_dims[block]):
+                            position.append(boolean_plate[y_filling][x_filling][block])
+
+                block_possible_positions.append(And(position))
+
+        solver.add(exactly_one(block_possible_positions))
 
     # 2º Blocks must not overlap together
 
     for y in range(max_height):
         for x in range(instance.width):
-            solver.add([Not(And(blocks[0], blocks[1])) for blocks in combinations(boolean_plate[y][x], 2)]) # - at most one
+            solver.add(at_most_one(boolean_plate[y][x]))
+
+
+
 
     solver.set('timeout', 500 * 1000)
     if solver.check() == sat:
@@ -101,12 +118,12 @@ def main():
     instance = read_file(instance_file)
 
     start = time.time()
-
     solver,boolean_plate = solve(instance)
-
     end = time.time()
 
     print(instance_file + ' - ' + "{:.2f}".format(end - start) + " seconds")
+
+    
 
 if __name__ == '__main__':
     main()
