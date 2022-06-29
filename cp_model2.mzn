@@ -1,7 +1,7 @@
 include "globals.mzn";
 include "chuffed.mzn";
 
-mzn_ignore_symmetry_breaking_constraints = true;
+%mzn_ignore_symmetry_breaking_constraints = true;
 
 % Variable Initalization:
 
@@ -30,9 +30,7 @@ int: min_height = ceil(( sum(block in blocks)(x_dims[block] * y_dims[block]) div
 
 var min_height..ceil(sum(y_dims)/floor(width / max(x_dims))): height;
 
-int: index = arg_max(y_dims);
-
-%constraint forall(block in blocks)(x_coords[block] + x_dims[block] <= width /\ Sy_coords[block] + y_dims[block] <= height);
+int: index = arg_max(y_dims);s
   
 
 % Global Constraints:
