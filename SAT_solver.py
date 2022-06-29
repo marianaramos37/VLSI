@@ -1,5 +1,6 @@
 from z3 import *
 from itertools import combinations
+import time
 
 # Instance 
 class Instance(object):
@@ -57,8 +58,8 @@ def solve(instance):
     print(y_coords)
     '''
 
-    # One plate for each block
-    boolean_plate = [[[Bool("coord_b"+str(b+1)+"_x"+str(x)+"_y"+str(y)) for x in range(instance.width)] for y in range(max_height) ] for b in range(instance.n)]  
+    # Plate width * max_height. Each position has n (nr of blocks) boolean values
+    boolean_plate = [[[Bool("coord_b"+str(b+1)+"_x"+str(x)+"_y"+str(y)) for b in range(instance.n)] for x in range(instance.width) ] for y in range(max_height)]  
     #print(boolean_plate)
 
     # Constraints
@@ -66,27 +67,29 @@ def solve(instance):
     # 1º Place blocks - sizes must not exceed the given width/height of the plate
 
     for block in range(instance.n):                                                           # For every block
-        blocks_possible_positions=[]
-        for y in range(max_height - y_dims[block] + 1):                                       # For every possible position where it fits
+        block_possible_positions=[]
+        for y in range(max_height - y_dims[block]):                                       # For every possible position where it fits
             for x in range(instance.width - x_dims[block] + 1):
-                block_position = []
-                if(x + x_dims[block] <= instance.width and  y + y_dims[block] <= max_height): # If it fits in both height and width
-                    block_position.append(boolean_plate[block][x][y])                         # Add to possible positions
-                else: block_position.append(Not(boolean_plate[block][x][y]))
-        blocks_possible_positions.append(And(block_position))
-        solver.add(blocks_possible_positions)
+                position = []
+                if(x + x_dims[block] <= instance.width and y + y_dims[block] <= max_height): # If it fits in both height and width
+                    position.append(boolean_plate[y][x][block])                         # Add to possible positions
+                    print(f"possible block - {block} at ({x},{y})")
+                else: position.append(Not(boolean_plate[y][x][block]))
+        block_possible_positions.append(And(position))
+        solver.add(block_possible_positions)
 
     # 2º Blocks must not overlap together
 
-    for y in range(2):
-        for x in range(2):
-            solver.add([Not(And(blocks[0], blocks[1])) for blocks in combinations(boolean_plate[x][y], 2)])
+    for y in range(max_height):
+        for x in range(instance.width):
+            solver.add([Not(And(blocks[0], blocks[1])) for blocks in combinations(boolean_plate[y][x], 2)]) # - at most one
 
-
-    solver.set('timeout', 300 * 1000)
+    solver.set('timeout', 500 * 1000)
     if solver.check() == sat:
         model = solver.model()
-        print(model)
+        for t in model.decls():
+            if is_true(model[t]):
+                print(t)
         print('SATISFIABLE')
     else:
         print('Not solvable')
@@ -96,7 +99,14 @@ def solve(instance):
 def main():
     instance_file = "instances\ins-1.txt"
     instance = read_file(instance_file)
+
+    start = time.time()
+
     solver,boolean_plate = solve(instance)
+
+    end = time.time()
+
+    print(instance_file + ' - ' + "{:.2f}".format(end - start) + " seconds")
 
 if __name__ == '__main__':
     main()
