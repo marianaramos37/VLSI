@@ -1,7 +1,7 @@
 include "globals.mzn";
 include "chuffed.mzn";
 
-%mzn_ignore_symmetry_breaking_constraints = true;
+mzn_ignore_symmetry_breaking_constraints = false;
 
 % Variable Initalization:
 
@@ -11,6 +11,7 @@ int: n;                                                     % Number of blocks
 array[1..n,1..2] of  int: dimensions;                       % Dimensions of blocks
 array[1..n] of int: x_dims = [dimensions[i,1]|i in 1..n];   % x dimention variables 
 array[1..n] of int: y_dims = [dimensions[i,2]|i in 1..n];   % y dimention variables
+
 
 % Auxilary Variables:
 
@@ -30,7 +31,9 @@ int: min_height = ceil(( sum(block in blocks)(x_dims[block] * y_dims[block]) div
 
 var min_height..ceil(sum(y_dims)/floor(width / max(x_dims))): height;
 
-int: index = arg_max(y_dims);s
+int: index = arg_max(y_dims);
+
+%constraint forall(block in blocks)(x_coords[block] + x_dims[block] <= width /\ Sy_coords[block] + y_dims[block] <= height);
   
 
 % Global Constraints:
@@ -41,17 +44,20 @@ constraint forall(block in blocks)(
   x_coords[block] + x_dims[block] <= width /\ 
   y_coords[block] + y_dims[block] <= height);
 
-constraint cumulative(x_coords, x_dims, y_dims, height);
-constraint cumulative(y_coords, y_dims, x_dims, width);
+% constraint cumulative(x_coords, x_dims, y_dims, height);
+% constraint cumulative(y_coords, y_dims, x_dims, width);
 
 % 2º Rectangles must not overlap together
 
 constraint diffn(x_coords, y_coords, x_dims, y_dims);
 
-constraint lex_lesseq(x_coords, [max(x_coords) - x_coords[i] | i in 1..n]);
-constraint lex_lesseq(x_coords, [max_x_coord - x_coords[i] | i in 1..n]);
-constraint lex_lesseq(y_coords, [max(y_coords) - y_coords[i] | i in 1..n]);
-constraint lex_lesseq(y_coords, [max_y_coord - y_coords[i] | i in 1..n]);
+
+
+
+% constraint lex_lesseq(x_coords, [max(x_coords) - x_coords[i] | i in 1..n]);
+% constraint lex_lesseq(x_coords, [max_x_coord - x_coords[i] | i in 1..n]);
+% constraint lex_lesseq(y_coords, [max(y_coords) - y_coords[i] | i in 1..n]);
+% constraint lex_lesseq(y_coords, [max_y_coord - y_coords[i] | i in 1..n]);
 
 constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
 
@@ -96,6 +102,40 @@ constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
 % % 4º Horizontal and Verical Flip
 
 
+
+
+
+
+% %%%% Dual Model:
+
+% array[blocks] of int: zero_array = [0 | block in blocks];
+
+% array[0..width-1, 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1] of var 0..n : board;
+
+
+% constraint forall( i in 0..width-1)(global_cardinality_low_up(board[i,0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1], 1..n, zero_array,
+% y_dims));
+
+% constraint forall( j in 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1)(global_cardinality_low_up(board[0..width-1,j], 1..n, zero_array,
+% x_dims));
+
+
+
+
+
+% %%% Channeling: 
+% constraint forall(i in 0..width-1, j in 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1, k in 1..n)
+% (board[i,j] = k <-> x_coords[k] <= i /\ i < x_coords[k] + x_dims[k] /\ y_coords[k] <= j /\ j < y_coords[k] + y_dims[k]);
+
+
+% %symmetry breaking: 
+
+% constraint lex_lesseq(array1d(board), [ board[i,j] | i in reverse(0..width-1), j in 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1 ])
+% /\ lex_lesseq(array1d(board), [ board[i,j] | i in 0..width-1, j in reverse(0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1) ])
+% /\ lex_lesseq(array1d(board), [ board[i,j] | i in reverse(0..width-1), j in reverse(0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1) ]);
+
+
+
 % % Search
 
 % ann: search_ann;
@@ -105,7 +145,7 @@ constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
 
 % Solve objective function: 
 
-solve :: int_search(x_coords, largest_smallest, indomain_min):: int_search(y_coords, largest_smallest, indomain_min):: restart_luby(1)
+solve :: int_search(x_coords, largest_smallest, indomain_max):: int_search(y_coords, largest_smallest, indomain_max):: restart_luby(1)
  minimize height;
 
 % Output: 
@@ -115,11 +155,3 @@ output["x_coordinates = ", show(x_coords), "\n",
     "x_dimensions = ", show(x_dims), "\n",
     "y_dimensions = ", show(y_dims), "\n",
     "minimum_height = ", show(height)];
-
-
-
-
-
-
-
-
