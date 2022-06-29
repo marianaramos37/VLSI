@@ -1,7 +1,7 @@
 include "globals.mzn";
 include "chuffed.mzn";
 
-mzn_ignore_symmetry_breaking_constraints = true;
+mzn_ignore_symmetry_breaking_constraints = false;
 
 % Variable Initalization:
 
@@ -106,11 +106,11 @@ constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
 
 
 
-%%%% Dual Model:
+% %%%% Dual Model:
 
-array[blocks] of int: zero_array = [0 | block in blocks];
+% array[blocks] of int: zero_array = [0 | block in blocks];
 
-array[0..width-1, 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1] of var 0..n : board;
+% array[0..width-1, 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1] of var 0..n : board;
 
 
 % constraint forall( i in 0..width-1)(global_cardinality_low_up(board[i,0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1], 1..n, zero_array,
@@ -123,16 +123,16 @@ array[0..width-1, 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1] of var 0.
 
 
 
-%%% Channeling: 
-constraint forall(i in 0..width-1, j in 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1, k in 1..n)
-(board[i,j] = k <-> x_coords[k] <= i /\ i < x_coords[k] + x_dims[k] /\ y_coords[k] <= j /\ j < y_coords[k] + y_dims[k]);
+% %%% Channeling: 
+% constraint forall(i in 0..width-1, j in 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1, k in 1..n)
+% (board[i,j] = k <-> x_coords[k] <= i /\ i < x_coords[k] + x_dims[k] /\ y_coords[k] <= j /\ j < y_coords[k] + y_dims[k]);
 
 
-%symmetry breaking: 
+% %symmetry breaking: 
 
-constraint lex_lesseq(array1d(board), [ board[i,j] | i in reverse(0..width-1), j in 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1 ])
-/\ lex_lesseq(array1d(board), [ board[i,j] | i in 0..width-1, j in reverse(0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1) ])
-/\ lex_lesseq(array1d(board), [ board[i,j] | i in reverse(0..width-1), j in reverse(0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1) ]);
+% constraint lex_lesseq(array1d(board), [ board[i,j] | i in reverse(0..width-1), j in 0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1 ])
+% /\ lex_lesseq(array1d(board), [ board[i,j] | i in 0..width-1, j in reverse(0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1) ])
+% /\ lex_lesseq(array1d(board), [ board[i,j] | i in reverse(0..width-1), j in reverse(0..ceil(sum(y_dims)/floor(width / max(x_dims))) - 1) ]);
 
 
 
@@ -145,7 +145,7 @@ constraint lex_lesseq(array1d(board), [ board[i,j] | i in reverse(0..width-1), j
 
 % Solve objective function: 
 
-solve :: int_search(x_coords, largest_smallest, indomain_min):: int_search(y_coords, largest_smallest, indomain_min):: restart_luby(1)
+solve :: int_search(x_coords, largest_smallest, indomain_max):: int_search(y_coords, largest_smallest, indomain_max):: restart_luby(1)
  minimize height;
 
 % Output: 
