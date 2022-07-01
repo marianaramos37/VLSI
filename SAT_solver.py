@@ -1,17 +1,21 @@
 from z3 import *
 from itertools import combinations
 import time
+import numpy as numpy
+from tqdm import tqdm
 
 # Aux functions
 
 def at_least_one(bool_vars):
-    return Or(bool_vars)
+    return [Or(bool_vars)]
 
 def at_most_one(bool_vars):
     return [Not(And(pair[0], pair[1])) for pair in combinations(bool_vars, 2)]
 
 def exactly_one(bool_vars):
-    return at_most_one(bool_vars) + [at_least_one(bool_vars)]
+    return at_most_one(bool_vars) + at_least_one(bool_vars)
+
+
 
 # Instance 
 class Instance(object):
@@ -54,7 +58,7 @@ def solve(instance):
         x_dims.append(x_dim)
         y_dims.append(y_dim )
 
-    max_height = int(sum(y_dims)//(instance.width/max(x_dims)))
+    max_height = max(max(y_dims),int(sum(y_dims)//(instance.width/max(x_dims))))
 
     print("Width of the plate: ")
     print(instance.width)
@@ -81,14 +85,14 @@ def solve(instance):
         block_possible_positions=[]
         for y in range(max_height - y_dims[block]):                                           # For every possible position where it fits
             for x in range(instance.width - x_dims[block] + 1):
-                position = []
+                block_occupation = []
                 
-                for y_filling in range(max_height):
+                for y_filling in range(max_height):                                           # And(coord_b1_x2_x3) -> coordinate (2,3) is occupied by block 1
                     for x_filling in range(instance.width):
-                        if(y_filling >= y and y_filling <= y + y_dims[block] and x_filling >= x and x_filling <= x + x_dims[block]):
-                            position.append(boolean_plate[y_filling][x_filling][block])
+                        if(y_filling >= y and y_filling < y + y_dims[block] and x_filling >= x and x_filling < x + x_dims[block]):
+                            block_occupation.append(boolean_plate[y_filling][x_filling][block])
 
-                block_possible_positions.append(And(position))
+                block_possible_positions.append(And(block_occupation))
 
         solver.add(exactly_one(block_possible_positions))
 
@@ -96,20 +100,44 @@ def solve(instance):
 
     for y in range(max_height):
         for x in range(instance.width):
-            solver.add(at_most_one(boolean_plate[y][x]))
+            solver.add(at_most_one(boolean_plate[y][x]))     # Only one True on each plate cell
 
 
+    # One hot encoding of height 
 
+    solution_height = [Bool("h"+str(height)) for height in range(max_height)]   # [h1,h2,h3,h4,...]
+    #print(solution_height)
+
+    solver.add(exactly_one([solution_height[i] for i in range(max_height)]))    # Only one value True on solution_height
+
+    # TODO: MISSING CONSTRAINT that says that solution_height[answer] == actual height !!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     solver.set('timeout', 500 * 1000)
-    if solver.check() == sat:
-        model = solver.model()
-        for t in model.decls():
-            if is_true(model[t]):
-                print(t)
-        print('SATISFIABLE')
-    else:
-        print('Not solvable')
+
+    satisfiable = False
+    
+    while True:
+        if solver.check() == sat:  # should break when finds solution
+
+            model = solver.model()
+            #for t in model.decls():
+            #    if is_true(model[t]):
+            #        print(t)
+            for height in range(max_height):
+                if model.eval(solution_height[height]):
+                    solution = height + 1
+                    print(solution)
+            
+            solver.add(at_least_one([solution_height[i] for i in range(solution )]))
+
+            satisfiable = True
+            break
+        else:
+            break
+    
+    if satisfiable: 
+        print("satisfiable")
+    else: print("not satisfiable")
 
     return solver, boolean_plate
 
