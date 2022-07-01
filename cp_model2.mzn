@@ -31,7 +31,8 @@ int: min_height = ceil(( sum(block in blocks)(x_dims[block] * y_dims[block]) div
 
 var min_height..ceil(sum(y_dims)/floor(width / max(x_dims))): height;
 
-int: index = arg_max(y_dims);
+int: index = arg_max(block in blocks)(y_dims[block] * x_dims[block]);
+% int: index = arg_max(y_dims);
 
 %constraint forall(block in blocks)(x_coords[block] + x_dims[block] <= width /\ Sy_coords[block] + y_dims[block] <= height);
   
@@ -145,7 +146,7 @@ constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
 
 % Solve objective function: 
 
-solve :: int_search(x_coords, largest_smallest, indomain_max):: int_search(y_coords, largest_smallest, indomain_max):: restart_luby(1)
+solve :: int_search(x_coords, largest_smallest, indomain_min):: int_search(y_coords, largest_smallest, indomain_min):: restart_luby(1)
  minimize height;
 
 % Output: 
