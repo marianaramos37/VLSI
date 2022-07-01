@@ -156,11 +156,3 @@ output["x_coordinates = ", show(x_coords), "\n",
     "x_dimensions = ", show(x_dims), "\n",
     "y_dimensions = ", show(y_dims), "\n",
     "minimum_height = ", show(height)];
-
-
-
-
-
-
-
-
