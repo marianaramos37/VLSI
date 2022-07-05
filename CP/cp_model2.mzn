@@ -55,10 +55,10 @@ constraint diffn(x_coords, y_coords, x_dims, y_dims);
 
 
 
-constraint lex_lesseq(x_coords, [max(x_coords) - x_coords[i] | i in 1..n]);
-constraint lex_lesseq(x_coords, [max_x_coord - x_coords[i] | i in 1..n]);
-constraint lex_lesseq(y_coords, [max(y_coords) - y_coords[i] | i in 1..n]);
-constraint lex_lesseq(y_coords, [max_y_coord - y_coords[i] | i in 1..n]);
+%constraint lex_lesseq(x_coords, [max(x_coords) - x_coords[i] | i in 1..n]);
+%constraint lex_lesseq(x_coords, [max_x_coord - x_coords[i] | i in 1..n]);
+%constraint lex_lesseq(y_coords, [max(y_coords) - y_coords[i] | i in 1..n]);
+%constraint lex_lesseq(y_coords, [max_y_coord - y_coords[i] | i in 1..n]);
 
 constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
 
