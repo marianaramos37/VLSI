@@ -45,8 +45,8 @@ constraint forall(block in blocks)(
   x_coords[block] + x_dims[block] <= width /\ 
   y_coords[block] + y_dims[block] <= height);
 
-% constraint cumulative(x_coords, x_dims, y_dims, height);
-% constraint cumulative(y_coords, y_dims, x_dims, width);
+constraint cumulative(x_coords, x_dims, y_dims, height);
+constraint cumulative(y_coords, y_dims, x_dims, width);
 
 % 2º Rectangles must not overlap together
 
@@ -54,13 +54,16 @@ constraint diffn(x_coords, y_coords, x_dims, y_dims);
 
 
 
+constraint lex_lesseq(x_coords, [width - (x_coords[i] + x_dims[i]) | i in 1..n]);
+constraint lex_lesseq(y_coords, [height - (y_coords[i] + y_dims[i]) | i in 1..n]);
 
-%constraint lex_lesseq(x_coords, [max(x_coords) - x_coords[i] | i in 1..n]);
+
+% constraint lex_lesseq(x_coords, [max(x_coords) - x_coords[i] | i in 1..n]);
 %constraint lex_lesseq(x_coords, [max_x_coord - x_coords[i] | i in 1..n]);
-%constraint lex_lesseq(y_coords, [max(y_coords) - y_coords[i] | i in 1..n]);
+% constraint lex_lesseq(y_coords, [max(y_coords) - y_coords[i] | i in 1..n]);
 %constraint lex_lesseq(y_coords, [max_y_coord - y_coords[i] | i in 1..n]);
 
-constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
+% constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
 
 % % Symmetry breaking:
 
@@ -146,7 +149,7 @@ constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
 
 % Solve objective function: 
 
-solve :: int_search(x_coords, largest_smallest, indomain_max):: int_search(y_coords, largest_smallest, indomain_max):: restart_luby(1)
+solve :: int_search(x_coords, largest_smallest, indomain_max):: int_search(y_coords, largest_smallest, indomain_max):: restart_luby(10)
  minimize height;
 
 % Output: 
