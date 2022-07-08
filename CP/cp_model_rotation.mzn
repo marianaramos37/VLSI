@@ -39,7 +39,7 @@ int: min_height = ceil(( sum(block in blocks)(x_dims_init[block] * y_dims_init[b
 
 var min_height..ceil(sum(max_dims)/floor(width / max_possible_x_dim)): height;
 
-% int: index = arg_max(block in blocks)(y_dims[block]*x_dims[block]);
+int: index = arg_max(block in blocks)(y_dims_init[block]*x_dims_init[block]);
 % int: index = arg_max(y_dims);
 
 %constraint forall(block in blocks)(x_coords[block] + x_dims[block] <= width /\ Sy_coords[block] + y_dims[block] <= height);
@@ -52,6 +52,8 @@ var min_height..ceil(sum(max_dims)/floor(width / max_possible_x_dim)): height;
 % constraint forall(block in blocks where y_dims[block] > width)(
 %   rotation[block] == false);
   
+constraint forall(block in blocks where y_dims_init[block] == x_dims_init[block])(
+  rotation[block] == false);
 
 constraint forall(block in blocks)(
   x_coords[block] + x_dims[block] <= width /\ 
@@ -66,8 +68,8 @@ constraint diffn(x_coords, y_coords, x_dims, y_dims);
 
 
 
-constraint lex_lesseq(x_coords, [width - (x_coords[i] + x_dims[i]) | i in 1..n]);
-constraint lex_lesseq(y_coords, [height - (y_coords[i] + y_dims[i]) | i in 1..n]);
+% constraint lex_lesseq(x_coords, [width - (x_coords[i] + x_dims[i]) | i in 1..n]);
+% constraint lex_lesseq(y_coords, [height - (y_coords[i] + y_dims[i]) | i in 1..n]);
 
 
 % constraint lex_lesseq(x_coords, [max(x_coords) - x_coords[i] | i in 1..n]);
@@ -75,7 +77,7 @@ constraint lex_lesseq(y_coords, [height - (y_coords[i] + y_dims[i]) | i in 1..n]
 % constraint lex_lesseq(y_coords, [max(y_coords) - y_coords[i] | i in 1..n]);
 %constraint lex_lesseq(y_coords, [max_y_coord - y_coords[i] | i in 1..n]);
 
-% constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
+constraint (x_coords[index] < ceil(width/2) /\ y_coords[index] < (height div 2));
 
 % % Symmetry breaking:
 
@@ -160,6 +162,7 @@ constraint lex_lesseq(y_coords, [height - (y_coords[i] + y_dims[i]) | i in 1..n]
 % search_ann1 = int_search(y_coords, input_order, indomain_random);
 
 % Solve objective function: 
+
 
 solve :: int_search(x_coords, largest_smallest, indomain_max):: int_search(y_coords, largest_smallest, indomain_max):: restart_luby(10)
  minimize height;
