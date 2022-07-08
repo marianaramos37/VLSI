@@ -79,20 +79,20 @@ constraint lex_lesseq(y_coords, [height - (y_coords[i] + y_dims[i]) | i in 1..n]
 
 % % 2º Blocks that have same height OR width and are adjacent are interchangeble
 
-% constraint forall(block1,block2 in blocks where block1 < block2 /\
-%                   x_dims[block1] = x_dims[block2] /\                      % Same width  
-%                   x_coords[block1] = x_coords[block2] /\                  % Adjacent along the y axis
-%                   y_dims[block1] + y_coords[block1] = y_coords[block2])(  % Adjacent along the y axis
-%                   symmetry_breaking_constraint(
-%                   lex_lesseq([y_coords[block1]], [y_coords[block2]])));   % Interchangeable  
+constraint forall(block1,block2 in blocks where block1 < block2 /\
+                  x_dims[block1] = x_dims[block2] /\                      % Same width  
+                  x_coords[block1] = x_coords[block2] /\                  % Adjacent along the y axis
+                  y_dims[block1] + y_coords[block1] = y_coords[block2])(  % Adjacent along the y axis
+                  symmetry_breaking_constraint(
+                  lex_lesseq([y_coords[block1]], [y_coords[block2]])));   % Interchangeable  
                              
 
-% constraint forall(block1,block2 in blocks where block1 < block2 /\
-%                   y_dims[block1] = y_dims[block2] /\                      % Same height 
-%                   y_coords[block1] = y_coords[block2] /\                  % Adjacent along the x axis
-%                   x_dims[block1] + x_coords[block1] = x_coords[block2])(  % Adjacent along the x axis
-%                   symmetry_breaking_constraint(
-%                   lex_lesseq([x_coords[block1]], [x_coords[block2]])));   % Interchangeable  
+constraint forall(block1,block2 in blocks where block1 < block2 /\
+                  y_dims[block1] = y_dims[block2] /\                      % Same height 
+                  y_coords[block1] = y_coords[block2] /\                  % Adjacent along the x axis
+                  x_dims[block1] + x_coords[block1] = x_coords[block2])(  % Adjacent along the x axis
+                  symmetry_breaking_constraint(
+                  lex_lesseq([x_coords[block1]], [x_coords[block2]])));   % Interchangeable  
                              
 % % 3º better performance by fixing block with bigger area on the (0,0) position.
 

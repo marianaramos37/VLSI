@@ -1,0 +1,51 @@
+x_coordinates = [7, 10, 17, 0, 3, 13, 9, 6, 3, 0, 4, 8, 12, 16]
+y_coordinates = [2, 2, 2, 1, 3, 5, 6, 5, 10, 7, 21, 15, 13, 7]
+x_dimensions = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4]
+y_dimensions = [3, 4, 5, 6, 7, 8, 9, 10, 11, 17, 3, 9, 11, 17]
+minimum_height = 24
+----------
+x_coordinates = [0, 7, 7, 7, 7, 0, 17, 17, 0, 14, 3, 10, 10, 3]
+y_coordinates = [9, 11, 0, 5, 16, 1, 14, 4, 12, 6, 20, 3, 12, 3]
+x_dimensions = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4]
+y_dimensions = [3, 4, 5, 6, 7, 8, 9, 10, 11, 17, 3, 9, 11, 17]
+minimum_height = 23
+----------
+x_coordinates = [7, 14, 0, 7, 0, 0, 17, 17, 7, 14, 3, 10, 10, 3]
+y_coordinates = [8, 18, 17, 2, 10, 2, 3, 12, 11, 1, 19, 2, 11, 2]
+x_dimensions = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4]
+y_dimensions = [3, 4, 5, 6, 7, 8, 9, 10, 11, 17, 3, 9, 11, 17]
+minimum_height = 22
+----------
+x_coordinates = [1, 17, 17, 11, 11, 11, 17, 8, 4, 14, 16, 4, 7, 0]
+y_coordinates = [0, 5, 0, 15, 8, 0, 9, 0, 9, 1, 18, 0, 10, 3]
+x_dimensions = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4]
+y_dimensions = [3, 4, 5, 6, 7, 8, 9, 10, 11, 17, 3, 9, 11, 17]
+minimum_height = 21
+----------
+x_coordinates = [0, 6, 13, 6, 13, 13, 3, 6, 3, 0, 9, 16, 16, 9]
+y_coordinates = [0, 0, 15, 14, 8, 0, 0, 4, 9, 3, 17, 0, 9, 0]
+x_dimensions = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4]
+y_dimensions = [3, 4, 5, 6, 7, 8, 9, 10, 11, 17, 3, 9, 11, 17]
+minimum_height = 20
+----------
+==========
+%%%mzn-stat: nodes=3042
+%%%mzn-stat: failures=1700
+%%%mzn-stat: restarts=67
+%%%mzn-stat: variables=1859
+%%%mzn-stat: intVars=68
+%%%mzn-stat: boolVariables=1789
+%%%mzn-stat: propagators=854
+%%%mzn-stat: propagations=373426
+%%%mzn-stat: peakDepth=65
+%%%mzn-stat: nogoods=1700
+%%%mzn-stat: backjumps=437
+%%%mzn-stat: peakMem=0.00
+%%%mzn-stat: time=0.201
+%%%mzn-stat: initTime=0.014
+%%%mzn-stat: solveTime=0.187
+%%%mzn-stat: objective=20
+%%%mzn-stat: optTime=0.187
+%%%mzn-stat: baseMem=0.00
+%%%mzn-stat: trailMem=0.01
+%%%mzn-stat: randomSeed=1657196111
