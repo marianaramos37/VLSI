@@ -1,0 +1,93 @@
+x_coordinates = [3, 0, 9, 9, 6, 3, 0, 0]
+y_coordinates = [10, 7, 7, 16, 17, 18, 19, 16]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 23
+----------
+x_coordinates = [3, 3, 6, 9, 0, 0, 9, 9]
+y_coordinates = [9, 13, 14, 15, 16, 11, 11, 8]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 22
+----------
+x_coordinates = [3, 0, 9, 9, 3, 0, 6, 6]
+y_coordinates = [9, 6, 6, 14, 15, 16, 17, 14]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 21
+----------
+x_coordinates = [3, 3, 6, 9, 0, 0, 9, 9]
+y_coordinates = [8, 11, 12, 13, 14, 9, 9, 6]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 20
+----------
+x_coordinates = [3, 0, 9, 6, 9, 0, 3, 3]
+y_coordinates = [8, 5, 5, 12, 13, 14, 15, 12]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 19
+----------
+x_coordinates = [3, 0, 6, 3, 9, 9, 0, 9]
+y_coordinates = [7, 9, 10, 11, 12, 7, 5, 4]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 18
+----------
+x_coordinates = [3, 0, 9, 6, 3, 9, 0, 6]
+y_coordinates = [7, 4, 4, 10, 11, 12, 13, 4]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 17
+----------
+x_coordinates = [3, 0, 9, 6, 3, 9, 0, 6]
+y_coordinates = [6, 7, 8, 9, 10, 3, 3, 3]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 16
+----------
+x_coordinates = [3, 0, 9, 9, 6, 3, 6, 0]
+y_coordinates = [6, 3, 0, 8, 9, 10, 2, 12]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 15
+----------
+x_coordinates = [3, 0, 9, 6, 3, 9, 0, 6]
+y_coordinates = [4, 5, 6, 7, 8, 1, 1, 1]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 14
+----------
+x_coordinates = [3, 0, 9, 6, 3, 9, 0, 6]
+y_coordinates = [3, 4, 5, 6, 7, 0, 0, 0]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 13
+----------
+x_coordinates = [0, 0, 9, 6, 3, 6, 9, 3]
+y_coordinates = [0, 3, 0, 0, 3, 7, 8, 9]
+x_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+y_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+minimum_height = 12
+----------
+==========
+%%%mzn-stat: nodes=238
+%%%mzn-stat: failures=24
+%%%mzn-stat: restarts=14
+%%%mzn-stat: variables=828
+%%%mzn-stat: intVars=41
+%%%mzn-stat: boolVariables=785
+%%%mzn-stat: propagators=296
+%%%mzn-stat: propagations=9775
+%%%mzn-stat: peakDepth=19
+%%%mzn-stat: nogoods=24
+%%%mzn-stat: backjumps=2
+%%%mzn-stat: peakMem=0.00
+%%%mzn-stat: time=0.006
+%%%mzn-stat: initTime=0.003
+%%%mzn-stat: solveTime=0.003
+%%%mzn-stat: objective=12
+%%%mzn-stat: optTime=0.003
+%%%mzn-stat: baseMem=0.00
+%%%mzn-stat: trailMem=0.00
+%%%mzn-stat: randomSeed=1657196065

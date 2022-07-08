@@ -9,16 +9,24 @@ int: width;                                                 % Width of plate
 int: n;                                                     % Number of blocks
 
 array[1..n,1..2] of  int: dimensions;                       % Dimensions of blocks
-array[1..n] of int: x_dims = [dimensions[i,1]|i in 1..n];   % x dimention variables 
-array[1..n] of int: y_dims = [dimensions[i,2]|i in 1..n];   % y dimention variables
+array[1..n] of int: x_dims_init = [dimensions[i,1]|i in 1..n];   % x dimention variables 
+array[1..n] of int: y_dims_init = [dimensions[i,2]|i in 1..n];   % y dimention variables
 
+array[1..n] of var bool: rotation;
+
+array[1..n] of var int: x_dims = [if rotation[i] then y_dims_init[i] else x_dims_init[i] endif | i in 1..n];
+array[1..n] of var int: y_dims = [if rotation[i] then x_dims_init[i] else y_dims_init[i] endif | i in 1..n];
+
+array[1..n] of int: max_dims = [if x_dims_init[i]>y_dims_init[i] then x_dims_init[i] else y_dims_init[i] endif | i in 1..n];
+array[1..n] of int: min_dims = [if x_dims_init[i]<y_dims_init[i] then x_dims_init[i] else y_dims_init[i] endif | i in 1..n];
+int: max_possible_x_dim = max([if max_dims[i] > width then 0 else max_dims[i] endif | i in 1..n]);
 
 % Auxilary Variables:
 
 set of int: blocks = 1..n;
 
-int: max_x_coord =(width - min(x_dims));                           % x coordinates upper bound
-int: max_y_coord = ceil(sum(y_dims)/floor(width / max(x_dims))) - min(y_dims);   % y coordinates upper bound
+int: max_x_coord =(width - min(min_dims));                           % x coordinates upper bound
+int: max_y_coord = ceil(sum(max_dims)/floor(width / max_possible_x_dim)) - min(min_dims);   % y coordinates upper bound
 
 array[blocks] of var 0..max_x_coord: x_coords;                     % x coordinates array
 array[blocks] of var 0..max_y_coord: y_coords;                     % y coordinates array
@@ -27,11 +35,11 @@ array[blocks] of var 0..max_y_coord: y_coords;                     % y coordinat
  
 % Defining boundaries for the height and Implied Constraints
 
-int: min_height = ceil(( sum(block in blocks)(x_dims[block] * y_dims[block]) div width));
+int: min_height = ceil(( sum(block in blocks)(x_dims_init[block] * y_dims_init[block]) div width));
 
-var min_height..ceil(sum(y_dims)/floor(width / max(x_dims))): height;
+var min_height..ceil(sum(max_dims)/floor(width / max_possible_x_dim)): height;
 
-int: index = arg_max(block in blocks)(y_dims[block]*x_dims[block]);
+% int: index = arg_max(block in blocks)(y_dims[block]*x_dims[block]);
 % int: index = arg_max(y_dims);
 
 %constraint forall(block in blocks)(x_coords[block] + x_dims[block] <= width /\ Sy_coords[block] + y_dims[block] <= height);
@@ -40,6 +48,10 @@ int: index = arg_max(block in blocks)(y_dims[block]*x_dims[block]);
 % Global Constraints:
 
 % 1º Rectangle sizes must not exceed the given width/height of the plate
+
+% constraint forall(block in blocks where y_dims[block] > width)(
+%   rotation[block] == false);
+  
 
 constraint forall(block in blocks)(
   x_coords[block] + x_dims[block] <= width /\ 
