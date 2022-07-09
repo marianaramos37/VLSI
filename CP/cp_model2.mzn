@@ -50,7 +50,7 @@ constraint cumulative(y_coords, y_dims, x_dims, width);
 
 % 2º Rectangles must not overlap together
 
-constraint diffn(x_coords, y_coords, x_dims, y_dims);
+% constraint diffn(x_coords, y_coords, x_dims, y_dims);
 
 
 
