@@ -41,27 +41,29 @@ int: index = arg_max(block in blocks)(y_dims[block]*x_dims[block]);
 
 % 1º Rectangle sizes must not exceed the given width/height of the plate
 
-% constraint forall(block in blocks)(
-%   x_coords[block] + x_dims[block] <= width /\ 
-%   y_coords[block] + y_dims[block] <= height);
+constraint forall(block in blocks)(
+  x_coords[block] + x_dims[block] <= width /\ 
+  y_coords[block] + y_dims[block] <= height);
 
 constraint cumulative(x_coords, x_dims, y_dims, height);
 constraint cumulative(y_coords, y_dims, x_dims, width);
 
 % 2º Rectangles must not overlap together
 
-% constraint diffn(x_coords, y_coords, x_dims, y_dims);
+constraint diffn(x_coords, y_coords, x_dims, y_dims);
 
+constraint(height >= min_height);
 
-
-constraint lex_lesseq(x_coords, [width - (x_coords[i] + x_dims[i]) | i in 1..n]);
-constraint lex_lesseq(y_coords, [height - (y_coords[i] + y_dims[i]) | i in 1..n]);
+% constraint lex_lesseq(x_coords, [width - (x_coords[i] + x_dims[i]) | i in 1..n]);
+% constraint lex_lesseq(y_coords, [height - (y_coords[i] + y_dims[i]) | i in 1..n]);
 
 
 % constraint lex_lesseq(x_coords, [max(x_coords) - x_coords[i] | i in 1..n]);
 %constraint lex_lesseq(x_coords, [max_x_coord - x_coords[i] | i in 1..n]);
 % constraint lex_lesseq(y_coords, [max(y_coords) - y_coords[i] | i in 1..n]);
 %constraint lex_lesseq(y_coords, [max_y_coord - y_coords[i] | i in 1..n]);
+
+constraint (x_coords[index] < ceil(width/2) /\ y_coords[index] < (height div 2));
 
 % constraint (x_coords[index] == 0 /\ y_coords[index] ==0);
 
