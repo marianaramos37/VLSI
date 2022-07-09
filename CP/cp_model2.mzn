@@ -41,9 +41,9 @@ int: index = arg_max(block in blocks)(y_dims[block]*x_dims[block]);
 
 % 1º Rectangle sizes must not exceed the given width/height of the plate
 
-constraint forall(block in blocks)(
-  x_coords[block] + x_dims[block] <= width /\ 
-  y_coords[block] + y_dims[block] <= height);
+% constraint forall(block in blocks)(
+%   x_coords[block] + x_dims[block] <= width /\ 
+%   y_coords[block] + y_dims[block] <= height);
 
 constraint cumulative(x_coords, x_dims, y_dims, height);
 constraint cumulative(y_coords, y_dims, x_dims, width);
