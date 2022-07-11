@@ -1,0 +1,243 @@
+x_coordinates = [7, 3, 1, 9, 2, 3, 8, 0]
+y_coordinates = [32, 23, 39, 38, 42, 45, 45, 45]
+x_dimensions = [3, 9, 8, 3, 6, 5, 4, 3]
+y_dimensions = [6, 3, 3, 7, 3, 3, 3, 3]
+minimum_height = 48
+----------
+x_coordinates = [9, 3, 1, 5, 3, 7, 0, 4]
+y_coordinates = [38, 16, 41, 20, 38, 44, 44, 44]
+x_dimensions = [3, 9, 8, 7, 6, 5, 4, 3]
+y_dimensions = [6, 3, 3, 3, 3, 3, 3, 3]
+minimum_height = 47
+----------
+x_coordinates = [5, 3, 4, 3, 6, 2, 7, 7]
+y_coordinates = [28, 4, 24, 39, 43, 36, 38, 35]
+x_dimensions = [3, 9, 8, 3, 6, 5, 4, 3]
+y_dimensions = [6, 3, 3, 7, 3, 3, 3, 3]
+minimum_height = 46
+----------
+x_coordinates = [6, 3, 4, 9, 5, 9, 2, 6]
+y_coordinates = [42, 12, 34, 27, 24, 37, 40, 39]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 45
+----------
+x_coordinates = [8, 5, 1, 9, 6, 8, 4, 4]
+y_coordinates = [23, 17, 41, 37, 34, 29, 28, 31]
+x_dimensions = [3, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [6, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 44
+----------
+x_coordinates = [9, 1, 2, 9, 3, 0, 5, 6]
+y_coordinates = [37, 20, 27, 30, 36, 35, 39, 33]
+x_dimensions = [3, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [6, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 43
+----------
+x_coordinates = [9, 5, 1, 9, 0, 6, 2, 2]
+y_coordinates = [29, 20, 39, 35, 36, 32, 33, 30]
+x_dimensions = [3, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [6, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 42
+----------
+x_coordinates = [3, 2, 2, 0, 6, 0, 8, 1]
+y_coordinates = [35, 15, 22, 29, 35, 36, 38, 25]
+x_dimensions = [3, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [6, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 41
+----------
+x_coordinates = [6, 3, 2, 3, 6, 0, 8, 8]
+y_coordinates = [31, 18, 2, 33, 37, 33, 34, 6]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 40
+----------
+x_coordinates = [6, 0, 2, 0, 6, 3, 8, 5]
+y_coordinates = [30, 18, 5, 32, 33, 32, 36, 11]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 39
+----------
+x_coordinates = [6, 1, 2, 3, 6, 0, 8, 0]
+y_coordinates = [32, 7, 16, 31, 29, 33, 35, 30]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 38
+----------
+x_coordinates = [6, 1, 2, 0, 5, 3, 7, 5]
+y_coordinates = [31, 14, 5, 30, 28, 32, 34, 25]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 37
+----------
+x_coordinates = [6, 2, 2, 0, 5, 3, 7, 9]
+y_coordinates = [30, 7, 19, 29, 27, 31, 33, 24]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 36
+----------
+x_coordinates = [2, 2, 2, 0, 6, 3, 8, 9]
+y_coordinates = [32, 14, 5, 25, 28, 27, 31, 25]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 35
+----------
+x_coordinates = [2, 2, 2, 3, 6, 0, 8, 9]
+y_coordinates = [31, 16, 13, 24, 27, 26, 30, 24]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 34
+----------
+x_coordinates = [1, 1, 4, 7, 1, 5, 8, 2]
+y_coordinates = [25, 12, 17, 26, 30, 20, 23, 21]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 33
+----------
+x_coordinates = [6, 1, 4, 0, 4, 3, 6, 5]
+y_coordinates = [26, 12, 20, 25, 23, 27, 29, 16]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 32
+----------
+x_coordinates = [6, 5, 2, 0, 6, 3, 8, 3]
+y_coordinates = [25, 8, 15, 24, 22, 26, 28, 23]
+x_dimensions = [6, 3, 3, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 8, 7, 3, 5, 3, 3]
+minimum_height = 31
+----------
+x_coordinates = [6, 1, 4, 3, 6, 0, 8, 9]
+y_coordinates = [24, 14, 14, 23, 21, 25, 27, 18]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 30
+----------
+x_coordinates = [6, 0, 3, 3, 6, 0, 8, 2]
+y_coordinates = [20, 8, 15, 22, 23, 22, 26, 19]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 29
+----------
+x_coordinates = [1, 1, 0, 3, 6, 0, 7, 9]
+y_coordinates = [25, 10, 15, 18, 21, 20, 24, 17]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 28
+----------
+x_coordinates = [6, 1, 4, 0, 6, 3, 8, 3]
+y_coordinates = [21, 8, 15, 20, 18, 22, 24, 19]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 27
+----------
+x_coordinates = [0, 4, 4, 1, 6, 9, 3, 7]
+y_coordinates = [20, 6, 15, 12, 18, 21, 23, 12]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 26
+----------
+x_coordinates = [6, 2, 1, 9, 0, 3, 8, 0]
+y_coordinates = [19, 9, 14, 12, 17, 20, 22, 22]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 25
+----------
+x_coordinates = [0, 3, 4, 3, 6, 1, 8, 8]
+y_coordinates = [20, 9, 15, 2, 21, 14, 18, 12]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 24
+----------
+x_coordinates = [6, 3, 1, 9, 0, 5, 1, 7]
+y_coordinates = [20, 8, 16, 13, 20, 11, 13, 5]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 23
+----------
+x_coordinates = [6, 3, 4, 1, 5, 0, 8, 3]
+y_coordinates = [4, 6, 16, 15, 19, 3, 7, 3]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 22
+----------
+x_coordinates = [0, 5, 4, 1, 6, 8, 3, 2]
+y_coordinates = [2, 8, 18, 14, 1, 4, 5, 8]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 21
+----------
+x_coordinates = [6, 4, 1, 8, 0, 3, 6, 9]
+y_coordinates = [1, 8, 17, 7, 0, 3, 4, 17]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 20
+----------
+x_coordinates = [6, 0, 0, 9, 3, 3, 7, 8]
+y_coordinates = [1, 8, 16, 7, 11, 3, 4, 16]
+x_dimensions = [6, 9, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 3, 3, 7, 3, 5, 3, 3]
+minimum_height = 19
+----------
+x_coordinates = [6, 0, 4, 6, 0, 3, 8, 9]
+y_coordinates = [7, 8, 15, 0, 5, 9, 12, 4]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 18
+----------
+x_coordinates = [0, 5, 4, 2, 6, 9, 0, 2]
+y_coordinates = [4, 7, 0, 7, 3, 6, 1, 14]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 17
+----------
+x_coordinates = [6, 0, 2, 9, 3, 3, 7, 5]
+y_coordinates = [6, 7, 0, 9, 10, 5, 3, 13]
+x_dimensions = [6, 3, 8, 3, 6, 3, 4, 3]
+y_dimensions = [3, 9, 3, 7, 3, 5, 3, 3]
+minimum_height = 16
+----------
+x_coordinates = [9, 0, 1, 9, 0, 6, 3, 0]
+y_coordinates = [9, 5, 2, 2, 8, 10, 11, 12]
+x_dimensions = [3, 9, 8, 3, 6, 3, 3, 3]
+y_dimensions = [6, 3, 3, 7, 3, 5, 4, 3]
+minimum_height = 15
+----------
+x_coordinates = [9, 0, 1, 9, 0, 6, 3, 0]
+y_coordinates = [8, 4, 0, 1, 7, 7, 10, 11]
+x_dimensions = [3, 9, 8, 3, 6, 3, 3, 3]
+y_dimensions = [6, 3, 3, 7, 3, 5, 4, 3]
+minimum_height = 14
+----------
+x_coordinates = [9, 0, 1, 9, 0, 6, 3, 0]
+y_coordinates = [7, 3, 0, 0, 6, 6, 9, 10]
+x_dimensions = [3, 9, 8, 3, 6, 3, 3, 3]
+y_dimensions = [6, 3, 3, 7, 3, 5, 4, 3]
+minimum_height = 13
+----------
+x_coordinates = [6, 3, 4, 5, 0, 0, 0, 0]
+y_coordinates = [9, 3, 6, 0, 9, 0, 6, 3]
+x_dimensions = [6, 9, 8, 7, 6, 5, 4, 3]
+y_dimensions = [3, 3, 3, 3, 3, 3, 3, 3]
+minimum_height = 12
+----------
+==========
+%%%mzn-stat: nodes=3187
+%%%mzn-stat: failures=1034
+%%%mzn-stat: restarts=81
+%%%mzn-stat: variables=1378
+%%%mzn-stat: intVars=35
+%%%mzn-stat: boolVariables=1341
+%%%mzn-stat: propagators=244
+%%%mzn-stat: propagations=182962
+%%%mzn-stat: peakDepth=44
+%%%mzn-stat: nogoods=1034
+%%%mzn-stat: backjumps=530
+%%%mzn-stat: peakMem=0.00
+%%%mzn-stat: time=0.061
+%%%mzn-stat: initTime=0.003
+%%%mzn-stat: solveTime=0.058
+%%%mzn-stat: objective=12
+%%%mzn-stat: optTime=0.058
+%%%mzn-stat: baseMem=0.00
+%%%mzn-stat: trailMem=0.00
+%%%mzn-stat: randomSeed=1657540995
